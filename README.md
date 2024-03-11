@@ -2,26 +2,34 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
 
-## Development server
+## Part 2
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Data Service:
 
-## Code scaffolding
+1. Change variable name and its type from data: any to questionForm: FormGroup
+2. Change the method name from sendData to sendForm
+3. Change the parameters name and type from \_data:any to \_questionForm: FormGroup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+App Module:
 
-## Build
+1. Import ReactiveFormsModule
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Form Builder Component:
 
-## Running unit tests
+1. Change variable name and type from question: string to questionForm: FormGroup
+2. Implement OnInit
+3. Inject formBuilder
+4. Inside ngOnInit, initialize formBuilder.group to this.questionForm
+5. Change the method name from sendData to sendForm
+6. Inside the sendForm method, change the dataService method and parameters from sendData(question) to sendForm(questionForm)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Form Builder Template:
 
-## Running end-to-end tests
+1. Bind the form to formGroup=questionForm
+2. Bind the ngSubmit to sendForm
+3. Change the binding of ngModel to formControlName
+4. Change button type to submit
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Survey Form Component:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. At the assignment of dataValue to this.question, change dataValue to dataValue.value['question']
