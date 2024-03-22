@@ -1,17 +1,33 @@
-import { Component } from '@angular/core';
-import { DataService } from '../data.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
   styleUrls: ['./form-builder.component.css'],
 })
-export class FormBuilderComponent {
-  question: string = '';
+export class FormBuilderComponent implements OnInit {
+  fbForm: FormGroup = new FormGroup({});
 
-  constructor(private dataService: DataService) {}
+  constructor(private formBuilder: FormBuilder) {}
 
-  sendData() {
-    this.dataService.sendData(this.question);
+  ngOnInit(): void {
+    this.fbForm = this.formBuilder.group({
+      questionForms: this.formBuilder.array([]),
+    });
+  }
+
+  get questionForms(): FormArray {
+    return this.fbForm.controls['questionForms'] as FormArray;
+  }
+
+  createTextForm() {
+    this.questionForms.push(
+      this.formBuilder.group({
+        question: [''],
+        answerType: ['text'],
+      })
+    );
+    console.log(this.fbForm);
   }
 }

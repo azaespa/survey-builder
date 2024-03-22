@@ -1,6 +1,15 @@
 <h1>Form Builder</h1>
-<form action="">
-    <label for="question">Add a question</label>
-    <input type="text" name="question" [(ngModel)]="question">
-    <button type="button" (click)="sendData()">Submit</button>
-</form>
+<button type="button">Multiple choice</button>
+<button type="button" (click)="createTextForm()">Text</button>
+
+<div [formGroup]="fbForm">
+    <div formArrayName="questionForms">
+        <div *ngFor="let qf of questionForms.controls; let i = index" [formGroupName]="i">
+            <h3>Question {{ i + 1 }}</h3>
+            <input type="text" formControlName="question">
+            <br>
+            <br>
+            <input type="text" placeholder="Their answer will go here..." disabled>
+        </div>
+    </div>
+</div>
